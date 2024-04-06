@@ -22,7 +22,11 @@ export default function Footer() {
           on GitHub
         </a>{" "}
         and{" "}
-        <a href="#" target="_blank" rel="noreferrer">
+        <a
+          href="https://phenomenal-nasturtium-df6034.netlify.app/"
+          target="_blank"
+          rel="noreferrer"
+        >
           hosted on Netlify
         </a>
       </p>
