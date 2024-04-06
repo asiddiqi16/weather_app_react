@@ -15,7 +15,7 @@ export default function Footer() {
         </a>
         and is&nbsp;
         <a
-          href="https://github.com/asiddiqi16/my_weather_app"
+          href="https://github.com/asiddiqi16/weather_app_react"
           target="_blank"
           rel="noreferrer"
         >
