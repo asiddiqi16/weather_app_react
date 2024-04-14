@@ -41,3 +41,17 @@
   position: relative;
   top: -38px;
 }
+
+.temp-units {
+  text-decoration: none;
+  font-size: 20px;
+  position: relative;
+  bottom: 20px;
+}
+
+.boldtext {
+  font-weight: bold;
+  font-size: 40px;
+  position: relative;
+  bottom: 10px;
+}
