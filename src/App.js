@@ -8,6 +8,7 @@ import { ThreeDots } from "react-loader-spinner";
 export default function App() {
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState(null);
+  const [ready, setReady] = useState(null);
 
   function showTemp(response) {
     let temp = response.data.temperature.current;
@@ -25,6 +26,7 @@ export default function App() {
       date: todaysDate,
     };
     setWeather(weather);
+    setReady(true);
   }
   function showWeather(event) {
     event.preventDefault();
@@ -35,7 +37,7 @@ export default function App() {
   function updateCity(event) {
     setCity(event.target.value);
   }
-  if (weather != null) {
+  if (ready != null) {
     return (
       <div className="App">
         <header className="Form">
@@ -46,7 +48,7 @@ export default function App() {
               required
               className="SearchInput"
               id="search-input"
-              onChange={updateCity}
+              onUpdate={updateCity}
             />
             <input type="submit" value="Search" className="SearchButton" />
           </form>
