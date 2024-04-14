@@ -18,6 +18,7 @@ export default function App() {
     let weatherIcon = response.data.condition.icon_url;
     let todaysDate = new Date(response.data.time * 1000);
     let weather = {
+      cityName: city,
       temperature: temp,
       desc: condition,
       humidity: humidity,
@@ -54,7 +55,7 @@ export default function App() {
           </form>
         </header>
         <main>
-          <CurrentWeather cityName={city} weather={weather} />
+          <CurrentWeather cityName={weather.cityName} weather={weather} />
         </main>
         <Footer />
       </div>
