@@ -1,14 +1,14 @@
 import React from "react";
 import "./CurrentTemperature.css";
 
-export default function CurrentTemperature() {
+export default function CurrentTemperature(props) {
   return (
     <div className="CurrentTemperature">
       <span className="CurrentTemperatureIcon" id="current-temperature-icon">
-        ☀️
+        <img src={props.weatherIcon} alt="weather-icon" />
       </span>
       <span className="CurrentTemperatureValue" id="CurrentTemperatureValue">
-        24
+        {Math.round(props.currentTemperature)}
       </span>
       <span className="CurrentTemperatureUnit">°C</span>
     </div>

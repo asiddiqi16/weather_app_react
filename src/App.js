@@ -5,8 +5,34 @@ import CurrentWeather from "./CurrentWeather";
 import Footer from "./Footer";
 
 export default function App() {
-  [city, setCity] = useState("");
-  [weather, setWeather] = useState(null);
+  const [city, setCity] = useState("");
+  const [weather, setWeather] = useState(null);
+  function formatDate(date) {
+    let minutes = date.getMinutes();
+    let hours = date.getHours();
+    let day = date.getDay();
+
+    if (minutes < 10) {
+      minutes = `0${minutes}`;
+    }
+
+    if (hours < 10) {
+      hours = `0${hours}`;
+    }
+
+    let days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+
+    let formattedDay = days[day];
+    return `${formattedDay} ${hours}:${minutes}`;
+  }
   function showTemp(response) {
     console.log(response.data);
     let temp = response.data.temperature.current;
@@ -14,6 +40,7 @@ export default function App() {
     let humidity = response.data.temperature.humidity;
     let windSpeed = response.data.wind.speed;
     let weatherIcon = response.data.condition.icon_url;
+    let todaysDate = formatDate(new Date(response.data.time * 1000));
     let weather = [
       {
         temperature: temp,
@@ -21,6 +48,7 @@ export default function App() {
         humidity: humidity,
         wind: windSpeed,
         icon: weatherIcon,
+        date: todaysDate,
       },
     ];
     setWeather(weather);
@@ -51,7 +79,7 @@ export default function App() {
         </form>
       </header>
       <main>
-        <CurrentWeather />
+        <CurrentWeather cityName={city} weather={weather} />
       </main>
       <Footer />
     </div>
