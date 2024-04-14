@@ -3,8 +3,6 @@ import "./CurrentWeather.css";
 import { ThreeDots } from "react-loader-spinner";
 import FormattedDate from "./FormattedDate";
 
-import CurrentTemperature from "./CurrentTemperature";
-
 export default function CurrentWeather(props) {
   if (props.weather === null) {
     return (
@@ -37,10 +35,21 @@ export default function CurrentWeather(props) {
             <strong>{props.weather.wind}km/h</strong>
           </p>
         </div>
-        <CurrentTemperature
-          weatherIcon={props.weather.icon}
-          currentTemperature={props.weather.temperature}
-        />
+        <div className="CurrentTemperature">
+          <span
+            className="CurrentTemperatureIcon"
+            id="current-temperature-icon"
+          >
+            <img src={props.weather.icon} alt="weather-icon" />
+          </span>
+          <span
+            className="CurrentTemperatureValue"
+            id="CurrentTemperatureValue"
+          >
+            {Math.round(props.weather.temperature)}
+          </span>
+          <span className="CurrentTemperatureUnit">°C</span>
+        </div>
       </div>
     );
   }
