@@ -48,7 +48,7 @@ export default function App() {
               required
               className="SearchInput"
               id="search-input"
-              onUpdate={updateCity}
+              onChange={updateCity}
             />
             <input type="submit" value="Search" className="SearchButton" />
           </form>

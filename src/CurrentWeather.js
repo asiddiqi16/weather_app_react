@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./CurrentWeather.css";
 
 import FormattedDate from "./FormattedDate";
@@ -7,7 +7,9 @@ export default function CurrentWeather(props) {
   const [temperature, setTemperature] = useState(
     Math.round(props.weather.temperature)
   );
-
+  useEffect(() => {
+    setTemperature(Math.round(props.weather.temperature));
+  }, [props]);
   const [metric, setMetric] = useState("temp-units boldtext");
   const [imperial, setImperial] = useState("temp-units");
   function showFaranheit(event) {
