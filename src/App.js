@@ -25,7 +25,6 @@ export default function App() {
       date: todaysDate,
     };
     setWeather(weather);
-    console.log(weather.temperature);
   }
   function showWeather(event) {
     event.preventDefault();

@@ -7,7 +7,7 @@ export default function CurrentWeather(props) {
   const [temperature, setTemperature] = useState(
     Math.round(props.weather.temperature)
   );
-  console.log(temperature);
+
   const [metric, setMetric] = useState("temp-units boldtext");
   const [imperial, setImperial] = useState("temp-units");
   function showFaranheit(event) {
@@ -27,7 +27,7 @@ export default function CurrentWeather(props) {
     <div className="CurrentWeather">
       <div>
         <h1 className="CurrentCity" id="current-city">
-          {props.city}
+          {props.cityName}
         </h1>
         <p className="CurrentDetails">
           <span id="current-date">
