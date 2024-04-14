@@ -1,6 +1,7 @@
 import React from "react";
 import "./CurrentWeather.css";
 import { ThreeDots } from "react-loader-spinner";
+import FormattedDate from "./FormattedDate";
 
 import CurrentTemperature from "./CurrentTemperature";
 
@@ -28,15 +29,17 @@ export default function CurrentWeather(props) {
             {props.city}
           </h1>
           <p className="CurrentDetails">
-            <span id="current-date">{props.weather[0].date}</span>,{" "}
-            {props.weather[0].desc} <br />
-            Humidity: <strong>{props.weather[0].humidity}%</strong>, Wind:{" "}
-            <strong>{props.weather[0].wind}km/h</strong>
+            <span id="current-date">
+              <FormattedDate todaysDate={props.weather.date} />
+            </span>
+            , {props.weather.desc} <br />
+            Humidity: <strong>{props.weather.humidity}%</strong>, Wind:{" "}
+            <strong>{props.weather.wind}km/h</strong>
           </p>
         </div>
         <CurrentTemperature
-          weatherIcon={props.weather[0].icon}
-          currentTemperature={props.weather[0].temperature}
+          weatherIcon={props.weather.icon}
+          currentTemperature={props.weather.temperature}
         />
       </div>
     );
