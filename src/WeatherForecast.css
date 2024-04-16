@@ -1,0 +1,29 @@
+.WeatherForecast {
+  text-align: center;
+  margin-top: 20px;
+  padding: 20px 5px;
+  background-color: #f9f7fe;
+  max-width: 120px;
+  border-radius: 10px;
+}
+
+.forecastDay {
+  font-size: 20px;
+  font-weight: bold;
+}
+.forecastWeatherIcon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.forecastTemperatureMax {
+  font-weight: bold;
+  margin-right: 10px;
+}
+.forecastTemperatureMin {
+  opacity: 0.4;
+}
+.forecastWeatherIcon {
+  display: flex;
+  justify-content: center;
+}
