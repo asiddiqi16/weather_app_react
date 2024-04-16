@@ -1,42 +1,34 @@
 import React from "react";
 import "./WeatherForecast.css";
-
+import FormattedDay from "./FormattedDay";
 export default function WeatherForecast(props) {
-  console.log(props);
-  function formatDay(timestamp) {
-    let todaysDate = new Date(timestamp * 1000);
-    let forecastDays = [
-      "Sun",
-      "Mon",
-      "Tues",
-      "Wed",
-      "Thurs",
-      "Fri",
-      "Sat",
-      "Sun",
-    ];
-    return forecastDays[todaysDate.getDay()];
+  function maxTemperature(maxTemp) {
+    return `${Math.round(maxTemp)}°`;
   }
+  function minTemperature(minTemp) {
+    return `${Math.round(minTemp)}°`;
+  }
+
   return (
     <div className="WeatherForecast">
       <div className="row">
         <div className="col">
           <div className="forecastDay">
-            {formatDay(props.forecast.forecastDay)}
+            <FormattedDay forecastDay={props.forecast[0].time} />
           </div>
           <div className="forecastWeatherIcon">
             <img
-              src={props.forecast.forecastIcon}
+              src={props.forecast[0].condition.icon_url}
               alt="weather-icon"
               width={50}
             />
           </div>
           <div className="forecastTemperature">
             <span className="forecastTemperatureMax">
-              {props.forecast.highTemp}°
+              {maxTemperature(props.forecast[0].temperature.maximum)}
             </span>
             <span className="forecastTemperatureMin">
-              {props.forecast.lowTemp}°
+              {minTemperature(props.forecast[0].temperature.minimum)}
             </span>
           </div>
         </div>

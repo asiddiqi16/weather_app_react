@@ -33,7 +33,7 @@ export default function App() {
 
   function showWeather(event) {
     event.preventDefault();
-    let apiKey = "483ecb596o30da81tf76d2a4bf19d4a6";
+    const apiKey = "483ecb596o30da81tf76d2a4bf19d4a6";
     let apiURL = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
 
     axios.get(apiURL).then(showTemp);

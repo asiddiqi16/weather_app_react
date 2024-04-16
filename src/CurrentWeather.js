@@ -31,23 +31,7 @@ export default function CurrentWeather(props) {
 
   function showForecast(response) {
     console.log(response);
-    let currentHighTemperature = Math.round(
-      response.data.daily[0].temperature.maximum
-    );
-
-    let currentLowTemperature = Math.round(
-      response.data.daily[0].temperature.minimum
-    );
-    let forecastWeatherIcon = response.data.daily[0].condition.icon_url;
-    let forecastDate = new Date(response.data.daily[0].time * 1000);
-
-    let forecastWeatherDetails = {
-      highTemp: currentHighTemperature,
-      lowTemp: currentLowTemperature,
-      forecastIcon: forecastWeatherIcon,
-      forecastDay: forecastDate,
-    };
-    setforecastWeather(forecastWeatherDetails);
+    setforecastWeather(response.data.daily);
   }
   if (forecastWeather != null) {
     return (
@@ -104,7 +88,7 @@ export default function CurrentWeather(props) {
       </div>
     );
   } else {
-    let apiKey = "483ecb596o30da81tf76d2a4bf19d4a6";
+    const apiKey = "483ecb596o30da81tf76d2a4bf19d4a6";
     let apiforecastURL = `https://api.shecodes.io/weather/v1/forecast?query=${props.cityName}&key=${apiKey}`;
     axios.get(apiforecastURL).then(showForecast);
   }
