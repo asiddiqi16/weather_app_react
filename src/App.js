@@ -4,12 +4,11 @@ import "./App.css";
 import CurrentWeather from "./CurrentWeather";
 import Footer from "./Footer";
 import { ThreeDots } from "react-loader-spinner";
-import WeatherForecast from "./WeatherForecast";
 
 export default function App() {
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState(null);
-  const [forecastWeather, setforecastWeather] = useState(null);
+
   const [ready, setReady] = useState(null);
 
   function showTemp(response) {
@@ -29,38 +28,15 @@ export default function App() {
       date: todaysDate,
     };
     setWeather(weather);
-  }
-  function showForecast(response) {
-    console.log(response);
-    let currentHighTemperature = Math.round(
-      response.data.daily[0].temperature.maximum
-    );
-
-    let currentLowTemperature = Math.round(
-      response.data.daily[0].temperature.minimum
-    );
-    let forecastWeatherIcon = response.data.daily[0].condition.icon_url;
-    let forecastDate = new Date(response.data.daily[0].time * 1000);
-
-    let forecastWeatherDetails = {
-      highTemp: currentHighTemperature,
-      lowTemp: currentLowTemperature,
-      forecastIcon: forecastWeatherIcon,
-      forecastDay: forecastDate,
-    };
-    setforecastWeather(forecastWeatherDetails);
-    console.log(forecastWeather);
     setReady(true);
   }
+
   function showWeather(event) {
     event.preventDefault();
     let apiKey = "483ecb596o30da81tf76d2a4bf19d4a6";
     let apiURL = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
 
     axios.get(apiURL).then(showTemp);
-
-    let apiforecastURL = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`;
-    axios.get(apiforecastURL).then(showForecast);
   }
   function updateCity(event) {
     setCity(event.target.value);
@@ -83,7 +59,6 @@ export default function App() {
         </header>
         <main>
           <CurrentWeather cityName={weather.cityName} weather={weather} />
-          <WeatherForecast forecast={forecastWeather} />
         </main>
         <Footer />
       </div>
