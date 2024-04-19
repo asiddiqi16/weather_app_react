@@ -12,42 +12,37 @@ export default function CurrentWeather(props) {
 
   const [metric, setMetric] = useState("temp-units boldtext");
   const [imperial, setImperial] = useState("temp-units");
-  const [units, setUnits] = useState("metric");
 
   function showFaranheit(event) {
     event.preventDefault();
     setTemperature(Math.round(props.weather.temperature * (9 / 5) + 32));
     setMetric("temp-units");
     setImperial("temp-units boldtext");
-    setUnits("imperial");
+
+    const apiKey = "483ecb596o30da81tf76d2a4bf19d4a6";
+    let apiforecastURL = `https://api.shecodes.io/weather/v1/forecast?query=${props.cityName}&key=${apiKey}&units=imperial`;
+
+    axios.get(apiforecastURL).then(showForecast);
   }
   function showCelsius(event) {
     event.preventDefault();
     setTemperature(Math.round(props.weather.temperature));
     setMetric("temp-units boldtext");
     setImperial("temp-units");
-    setUnits("metric");
+
+    const apiKey = "483ecb596o30da81tf76d2a4bf19d4a6";
+    let apiforecastURL = `https://api.shecodes.io/weather/v1/forecast?query=${props.cityName}&key=${apiKey}&units=metric`;
+
+    axios.get(apiforecastURL).then(showForecast);
   }
 
   function showForecast(response) {
     setforecastWeather(response.data.daily);
   }
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     setTemperature(Math.round(props.weather.temperature));
-    const apiKey = "483ecb596o30da81tf76d2a4bf19d4a6";
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    let apiforecastURL = `https://api.shecodes.io/weather/v1/forecast?query=${props.cityName}&key=${apiKey}&units=${units}`;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    axios.get(apiforecastURL).then(showForecast);
   }, [props]);
-  useEffect(() => {
-    const apiKey = "483ecb596o30da81tf76d2a4bf19d4a6";
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    let apiforecastURL = `https://api.shecodes.io/weather/v1/forecast?query=${props.cityName}&key=${apiKey}&units=${units}`;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    axios.get(apiforecastURL).then(showForecast);
-  }, [units]);
+
   if (forecastWeather != null) {
     return (
       <div className="WeatherInfo">
@@ -116,7 +111,7 @@ export default function CurrentWeather(props) {
     );
   } else {
     const apiKey = "483ecb596o30da81tf76d2a4bf19d4a6";
-    let apiforecastURL = `https://api.shecodes.io/weather/v1/forecast?query=${props.cityName}&key=${apiKey}&units=${units}`;
+    let apiforecastURL = `https://api.shecodes.io/weather/v1/forecast?query=${props.cityName}&key=${apiKey}&units=metric`;
 
     axios.get(apiforecastURL).then(showForecast);
   }
