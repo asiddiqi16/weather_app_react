@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./WeatherForecast.css";
 import FormattedDay from "./FormattedDay";
 export default function WeatherForecast(props) {
+  const [forecast, setForecast] = useState(props.forecast);
+  useEffect(() => {
+    setForecast(props.forecast);
+  }, [props]);
   function maxTemperature(maxTemp) {
     return `${Math.round(maxTemp)}°`;
   }
@@ -14,21 +18,21 @@ export default function WeatherForecast(props) {
       <div className="row">
         <div className="col">
           <div className="forecastDay">
-            <FormattedDay forecastDay={props.forecast[0].time} />
+            <FormattedDay forecastDay={forecast.time} />
           </div>
           <div className="forecastWeatherIcon">
             <img
-              src={props.forecast[0].condition.icon_url}
+              src={forecast.condition.icon_url}
               alt="weather-icon"
               width={50}
             />
           </div>
           <div className="forecastTemperature">
             <span className="forecastTemperatureMax">
-              {maxTemperature(props.forecast[0].temperature.maximum)}
+              {maxTemperature(forecast.temperature.maximum)}
             </span>
             <span className="forecastTemperatureMin">
-              {minTemperature(props.forecast[0].temperature.minimum)}
+              {minTemperature(forecast.temperature.minimum)}
             </span>
           </div>
         </div>

@@ -9,29 +9,34 @@ export default function CurrentWeather(props) {
   const [temperature, setTemperature] = useState(
     Math.round(props.weather.temperature)
   );
+
   useEffect(() => {
     setTemperature(Math.round(props.weather.temperature));
   }, [props]);
 
   const [metric, setMetric] = useState("temp-units boldtext");
   const [imperial, setImperial] = useState("temp-units");
+  const [units, setUnits] = useState("metric");
 
   function showFaranheit(event) {
     event.preventDefault();
     setTemperature(Math.round(props.weather.temperature * (9 / 5) + 32));
     setMetric("temp-units");
     setImperial("temp-units boldtext");
+    setUnits("imperial");
   }
   function showCelsius(event) {
     event.preventDefault();
     setTemperature(Math.round(props.weather.temperature));
     setMetric("temp-units boldtext");
     setImperial("temp-units");
+    setUnits("metric");
   }
 
   function showForecast(response) {
     console.log(response);
     setforecastWeather(response.data.daily);
+    console.log(forecastWeather);
   }
   if (forecastWeather != null) {
     return (
@@ -84,12 +89,25 @@ export default function CurrentWeather(props) {
             </span>
           </div>
         </div>
-        <WeatherForecast forecast={forecastWeather} />
+        <div className="foreCastDetails">
+          {forecastWeather.map(function (forecastDetails, index) {
+            if (index < 6) {
+              return (
+                <div className="weatherForecastDetails" key={index}>
+                  <WeatherForecast forecast={forecastDetails} />
+                </div>
+              );
+            } else {
+              return <div className="weatherForecastDetails"></div>;
+            }
+          })}
+        </div>
       </div>
     );
   } else {
     const apiKey = "483ecb596o30da81tf76d2a4bf19d4a6";
-    let apiforecastURL = `https://api.shecodes.io/weather/v1/forecast?query=${props.cityName}&key=${apiKey}`;
+    let apiforecastURL = `https://api.shecodes.io/weather/v1/forecast?query=${props.cityName}&key=${apiKey}&units=${units}`;
+
     axios.get(apiforecastURL).then(showForecast);
   }
 }
