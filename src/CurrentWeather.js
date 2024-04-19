@@ -30,24 +30,22 @@ export default function CurrentWeather(props) {
   }
 
   function showForecast(response) {
-    console.log(response);
     setforecastWeather(response.data.daily);
-    console.log(forecastWeather);
   }
   useEffect(() => {
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     setTemperature(Math.round(props.weather.temperature));
     const apiKey = "483ecb596o30da81tf76d2a4bf19d4a6";
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     let apiforecastURL = `https://api.shecodes.io/weather/v1/forecast?query=${props.cityName}&key=${apiKey}&units=${units}`;
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     axios.get(apiforecastURL).then(showForecast);
   }, [props]);
   useEffect(() => {
     const apiKey = "483ecb596o30da81tf76d2a4bf19d4a6";
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     let apiforecastURL = `https://api.shecodes.io/weather/v1/forecast?query=${props.cityName}&key=${apiKey}&units=${units}`;
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     axios.get(apiforecastURL).then(showForecast);
   }, [units]);
   if (forecastWeather != null) {
