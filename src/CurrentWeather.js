@@ -10,10 +10,6 @@ export default function CurrentWeather(props) {
     Math.round(props.weather.temperature)
   );
 
-  useEffect(() => {
-    setTemperature(Math.round(props.weather.temperature));
-  }, [props]);
-
   const [metric, setMetric] = useState("temp-units boldtext");
   const [imperial, setImperial] = useState("temp-units");
   const [units, setUnits] = useState("metric");
@@ -38,6 +34,19 @@ export default function CurrentWeather(props) {
     setforecastWeather(response.data.daily);
     console.log(forecastWeather);
   }
+  useEffect(() => {
+    setTemperature(Math.round(props.weather.temperature));
+    const apiKey = "483ecb596o30da81tf76d2a4bf19d4a6";
+    let apiforecastURL = `https://api.shecodes.io/weather/v1/forecast?query=${props.cityName}&key=${apiKey}&units=${units}`;
+
+    axios.get(apiforecastURL).then(showForecast);
+  }, [props]);
+  useEffect(() => {
+    const apiKey = "483ecb596o30da81tf76d2a4bf19d4a6";
+    let apiforecastURL = `https://api.shecodes.io/weather/v1/forecast?query=${props.cityName}&key=${apiKey}&units=${units}`;
+
+    axios.get(apiforecastURL).then(showForecast);
+  }, [units]);
   if (forecastWeather != null) {
     return (
       <div className="WeatherInfo">
