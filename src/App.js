@@ -8,7 +8,7 @@ import { ThreeDots } from "react-loader-spinner";
 export default function App() {
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState(null);
-
+  const [forecastWeather, setforecastWeather] = useState(null);
   const [ready, setReady] = useState(null);
 
   function showTemp(response) {
@@ -19,7 +19,6 @@ export default function App() {
     let weatherIcon = response.data.condition.icon_url;
     let todaysDate = new Date(response.data.time * 1000);
     let weather = {
-      cityName: city,
       temperature: temp,
       desc: condition,
       humidity: humidity,
@@ -28,6 +27,9 @@ export default function App() {
       date: todaysDate,
     };
     setWeather(weather);
+  }
+  function showForecast(response) {
+    setforecastWeather(response.data.daily);
     setReady(true);
   }
 
@@ -37,6 +39,10 @@ export default function App() {
     let apiURL = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
 
     axios.get(apiURL).then(showTemp);
+
+    let apiforecastURL = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+
+    axios.get(apiforecastURL).then(showForecast);
   }
   function updateCity(event) {
     setCity(event.target.value);
@@ -58,7 +64,11 @@ export default function App() {
           </form>
         </header>
         <main>
-          <CurrentWeather cityName={weather.cityName} weather={weather} />
+          <CurrentWeather
+            cityName={city}
+            weather={weather}
+            forecast={forecastWeather}
+          />
         </main>
         <Footer />
       </div>

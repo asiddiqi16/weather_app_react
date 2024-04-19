@@ -5,7 +5,8 @@ import WeatherForecast from "./WeatherForecast";
 import FormattedDate from "./FormattedDate";
 
 export default function CurrentWeather(props) {
-  const [forecastWeather, setforecastWeather] = useState(null);
+  const [forecastWeather, setforecastWeather] = useState(props.forecast);
+
   const [temperature, setTemperature] = useState(
     Math.round(props.weather.temperature)
   );
@@ -41,6 +42,7 @@ export default function CurrentWeather(props) {
   }
   useEffect(() => {
     setTemperature(Math.round(props.weather.temperature));
+    setforecastWeather(props.forecast);
   }, [props]);
 
   if (forecastWeather != null) {
@@ -110,9 +112,6 @@ export default function CurrentWeather(props) {
       </div>
     );
   } else {
-    const apiKey = "483ecb596o30da81tf76d2a4bf19d4a6";
-    let apiforecastURL = `https://api.shecodes.io/weather/v1/forecast?query=${props.cityName}&key=${apiKey}&units=metric`;
-
-    axios.get(apiforecastURL).then(showForecast);
+    return <div></div>;
   }
 }
